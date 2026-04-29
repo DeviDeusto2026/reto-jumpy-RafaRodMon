@@ -1,30 +1,18 @@
 using UnityEngine;
 
-public class TriggerWin : MonoBehaviour
+public class Winning : MonoBehaviour
 {
-    [SerializeField] private GameObject textoVictoria;
+    [SerializeField] private GameObject winText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    private const string PLAYER_NAME = "Character";
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Character")
-        {
-            if (textoVictoria != null)
-            {
-                textoVictoria.SetActive(true);
-            }
+        if (other.gameObject.name != PLAYER_NAME) return;
 
-            Time.timeScale = 0f;
-        }
+        if (winText != null)
+            winText.SetActive(true);
+
+        Time.timeScale = 0f;
     }
 }

@@ -1,29 +1,29 @@
 using UnityEngine;
 
-public class CollisionDetector : MonoBehaviour
+public class PlatformPassThrough : MonoBehaviour
 {
-    private Collider platformCollider;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Collider playerCollider;
+
     void Start()
     {
-        platformCollider = GetComponent<Collider>();
+        playerCollider = GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerStay(Collider other)
     {
-        GameObject fox = GameObject.FindWithTag("Player");
+        if (!other.CompareTag("Platform")) return;
 
-        if (fox != null)
-        {
-            if (fox.transform.position.y > transform.position.y)
-            {
-                platformCollider.isTrigger = false;
-            }
-            else
-            {
-                platformCollider.isTrigger = true;
-            }
-        }
+        float platformTop = other.bounds.max.y;
+        float playerBottom = playerCollider.bounds.min.y;
+
+        other.isTrigger = playerBottom < platformTop;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Platform")) return;
+
+        // Al salir, nos aseguramos de que quede sólida
+        other.isTrigger = false;
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Camera : MonoBehaviour
+public class Camara : MonoBehaviour
 {
 
     public float cameraSpeed = 1f;
@@ -41,11 +40,6 @@ public class Camera : MonoBehaviour
             Debug.Log("¡El zorro ha salido de la vista por abajo!");
             ReiniciarJuego();
         }
-    }
-
-    private Vector3 WorldToViewportPoint(Vector3 position)
-    {
-        throw new NotImplementedException();
     }
 
     void ReiniciarJuego()
